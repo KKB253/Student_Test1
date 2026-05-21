@@ -298,6 +298,14 @@ document.getElementById('reloadBtn').addEventListener('click', () => {
   inp.click();
 });
 
+// ===== 자동 파일 로드 =====
+fetch('데이터.xlsx')
+  .then(res => res.arrayBuffer())
+  .then(data => {
+    const file = new File([data], '데이터.xlsx');
+    processFile(file);
+  });
+  
 async function processFile(file) {
   if (!file.name.match(/\.xlsx?$/i)) { alert('xlsx 파일만 지원됩니다.'); return; }
   const reader = new FileReader();
